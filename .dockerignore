@@ -1,0 +1,6 @@
+.git*
+.kubernetes*
+.env
+vendor*
+Dockerfile
+.dockerignore
