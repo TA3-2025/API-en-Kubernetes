@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  namespace: animales
+spec:
+  selector:
+    matchLabels:
+      app: api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api
+          image: ggmartinez/laravel:php-8.3-apache
+          ports:
+            - containerPort: 80
+          # Descomentar para saltear los seeders
+          # env:
+          #   - name: SKIP_SEEDERS
+          #     value: "true"
+          volumeMounts:
+            - mountPath: /var/www/html
+              name: source-code
+         
+      volumes:
+        - name: source-code
+          hostPath:
+            path: /Users/gonzalo.martinez/Desktop/api-en-kubernetes
+            type: Directory
